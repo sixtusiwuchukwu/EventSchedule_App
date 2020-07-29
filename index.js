@@ -63,7 +63,7 @@ mongoose
 
 // initialize server port
 const PORT = process.env.PORT;
-const mode = process.env === "production";
+const mode = process.env.NODE_ENV === "production";
 const BASE_URL = mode
   ? `https://eventschedule.herokuapp.com${server.graphqlPath}`
   : `http://localhost:${PORT}${server.graphqlPath}`;
