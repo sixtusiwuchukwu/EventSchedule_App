@@ -3,7 +3,7 @@
 If you cloned this App from github or gitlab
 
 ```
-you have to first run `npm install` in the root folder in the terminal to install nodemodule
+you have to first run  `npm install` in the root folder in the terminal to install nodemodule
 
 ```
 
@@ -14,9 +14,17 @@ second start the app by runing `npm start`
 
 This is a documentary of how to get different endpoints in this App
 
+`this endpoints was written by iwuchukwu sixtus`
+https://twitter.com/sixtusiwuchukwu
+
+https://web.facebook.com/sixtus.iwuchukwu.31
+
+https://gitlab.com/learnfactory/intern-tracka/tracker-base/-/tree/master/sixtus/EventSchedule
+
+`consumer using appoloClient or graphql playground sholud hit the server at this endpoint` (https://eventschedule.herokuapp.com/graphql )
 The different endpoints includes:
 
-- Open endpoints require no Authentication.
+### below are Open endpoints require no Authentication.
 
 # signup user
 
@@ -32,7 +40,9 @@ signinUser(email: String!, password: String!): User
 
 ```
 
-# user type
+### signinUser(email: String!, password: String!): `User`
+
+will return values below which you choose any value you need
 
 ```
 
@@ -47,7 +57,21 @@ signinUser(email: String!, password: String!): User
 
 ```
 
-# below is an event type
+## below are closed endpoints that require Authentication.
+
+`you have to set token to the header when sending any request`
+
+# below fetches all events which will require user id
+
+```
+
+   getEvents(_id: ID!): [Event]
+
+```
+
+### getEvents(\_id: ID!):`[Event]`
+
+will return array of object as a response values below show list of value that will be returned after a sucess which you can choose any value you need
 
 ```
 
@@ -65,14 +89,6 @@ signinUser(email: String!, password: String!): User
 
 ```
 
-# below fetches all events which will require user id
-
-```
-
-   getEvents(_id: ID!): [Event]
-
-```
-
 # fetches all scheduled events which will require a valide user id
 
 ```
@@ -87,7 +103,21 @@ getSchedule(_id: ID): [Event]
 
 ```
 
-# below modify an event made by a user. this will require a valid user id and will return a updated version of the event
+# below fetches all important events of a user which will require the user id
+
+```
+ getImportant(_id: ID!): [Event]
+
+```
+
+# below fetches all today events of a user which will require the user id
+
+```
+ getToday(_id: ID!): [Event]
+
+```
+
+# below modify an event made by a user. this will require a valid user id and will return an updated version of the event
 
 ```
 
@@ -121,11 +151,30 @@ addEvent(
 
 ```
 
-# logged in user can modify the `important` status of their event with provided \_id
+# authenticated user can modify the `important` status of their event with provided \_id
 
 ```
   important(_id: ID!): Event
 
 ```
 
-<!-- which will return the user details used in siginup as a result of sucess save to database -->
+# authenticated user can delete Event
+
+```
+deleteEvent(_id: ID): Event
+
+```
+
+# authenticated user can delete all event created by the user
+
+```
+deleteEvents: Event
+
+```
+
+# authenticated user can modify the `done` status of their event with provided \_id
+
+```
+ done(_id: ID!): Event
+
+```
