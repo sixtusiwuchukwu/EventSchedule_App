@@ -28,6 +28,8 @@ const server = new ApolloServer({
       reportSchema: true,
     },
   }),
+  introspection: true,
+  tracing: true,
 });
 // setting middleware
 
