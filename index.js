@@ -24,6 +24,9 @@ const server = new ApolloServer({
     res,
     Event,
     User,
+    engine: {
+      reportSchema: true,
+    },
   }),
 });
 // setting middleware
