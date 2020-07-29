@@ -70,7 +70,7 @@ const BASE_URL = mode
   ? `https://eventschedule.herokuapp.com${server.graphqlPath}`
   : `http://localhost:${PORT}${server.graphqlPath}`;
 
-console.log(mode);
+console.log("production:", mode);
 
 app.listen({ port: PORT || 2000 }, () =>
   console.log(`🚀 Server ready at ${BASE_URL}`)

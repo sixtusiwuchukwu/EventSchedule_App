@@ -44,11 +44,13 @@ signinUser(email: String!, password: String!): User
     token: String
   }
 
+
 ```
 
 # below is an event type
 
 ```
+
   type Event {
     _id: ID
     type: String
@@ -60,31 +62,35 @@ signinUser(email: String!, password: String!): User
     creator: ID
   }
 
-```
-
-# below fetches all events by the logged in user \_id
 
 ```
+
+# below fetches all events which will require user id
+
+```
+
    getEvents(_id: ID!): [Event]
 
 ```
 
-# fetches all scheduled events based on the logged in user)
+# fetches all scheduled events which will require a valide user id
 
 ```
 getSchedule(_id: ID): [Event]
 
 ```
 
-# below fetches all done events of logged in user
+# below fetches all done events of a user which will require the user id
 
 ```
  getDone(_id: ID!): [Event]
-```
-
-# logged in user can modify post with provided \_id
 
 ```
+
+# below modify an event made by a user. this will require a valid user id and will return a updated version of the event
+
+```
+
    updateEvent(
       _id: ID
       type: String
@@ -95,11 +101,13 @@ getSchedule(_id: ID): [Event]
       attendees: [String]
     ): Event
 
-```
-
-# logged in user can addEvent
 
 ```
+
+# An event can be created using the following mutation below
+
+```
+
 addEvent(
       _id: ID
       type: String
@@ -113,7 +121,7 @@ addEvent(
 
 ```
 
-# (logged in user can modify the `important` status of their event with provided \_id)
+# logged in user can modify the `important` status of their event with provided \_id
 
 ```
   important(_id: ID!): Event

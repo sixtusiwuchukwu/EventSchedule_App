@@ -55,7 +55,7 @@ const UserMutation = {
       throw new Error("UNATHOURIZED");
     }
 
-    const existingEvent = Event.findOne({ email, username, password });
+    const existingEvent = User.findOne({ email, username, password });
 
     if (existingEvent._id !== id) throw new Error("duplicate found ");
 
