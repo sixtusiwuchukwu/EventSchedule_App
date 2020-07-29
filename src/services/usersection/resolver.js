@@ -12,6 +12,12 @@ const Hash = require("../../helpers/passwordHash/index");
 console.log(Hash);
 const UserMutation = {
   signupUser: async (root, { email, username, password }, { User }, info) => {
+    const exitinguser = User.findOne({ email });
+
+    if (exitinguser) {
+      throw new Error(`user with ${email} already exist`);
+    }
+
     const newuser = await User.create({ email, username, password });
     console.log(newuser);
     return newuser;
@@ -48,6 +54,10 @@ const UserMutation = {
     if (!req.isAuth) {
       throw new Error("UNATHOURIZED");
     }
+
+    const existingEvent = Event.findOne({ email, username, password });
+
+    if (existingEvent._id !== id) throw new Error("duplicate found ");
 
     const founduser = await User.findByIdAndUpdate(
       id,

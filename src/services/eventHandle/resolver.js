@@ -85,7 +85,7 @@ const EventMutaion = {
       throw new Error("unAuthorised");
     }
 
-    let existingEvent = await Event.findone({
+    let existingEvent = await Event.findOne({
       type,
       location,
       date: new Date(date),
@@ -122,6 +122,18 @@ const EventMutaion = {
     if (!req.isAuth) {
       throw new Error("unAuthorised");
     }
+
+    let existingEvent = await Event.findOne({
+      type,
+      location,
+      date: new Date(date),
+      important,
+      done,
+      attendees,
+    });
+
+    // if (existingEvent._id !== _id) throw new Error("found duplicate");
+
     return await Event.findByIdAndUpdate(
       { _id },
       {
@@ -133,7 +145,8 @@ const EventMutaion = {
           done,
           attendees,
         },
-      }
+      },
+      { new: true }
     );
 
     // <.....updating of  Event codes ends........>

@@ -60,6 +60,6 @@ mongoose
 
 // initialize server port
 
-app.listen({ port: 2000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:2080${server.graphqlPath}`)
+app.listen({ port: process.env.PORT || 2000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:2000${server.graphqlPath}`)
 );
