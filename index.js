@@ -62,7 +62,12 @@ mongoose
   });
 
 // initialize server port
+const PORT = process.env.PORT;
+const mode = process.env === "production";
+const BASE_URL = mode
+  ? `https://eventschedule.herokuapp.com${server.graphqlPath}`
+  : `http://localhost:${PORT}${server.graphqlPath}`;
 
-app.listen({ port: process.env.PORT || 2000 }, () =>
-  console.log(`🚀 Server ready at http://localhost:2000${server.graphqlPath}`)
+app.listen({ port: PORT || 2000 }, () =>
+  console.log(`🚀 Server ready at ${BASE_URL}`)
 );
