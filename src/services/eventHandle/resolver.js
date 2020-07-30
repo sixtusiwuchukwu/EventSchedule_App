@@ -86,13 +86,10 @@ const EventMutaion = {
     }
 
     let existingEvent = await Event.findOne({
-      type,
-      location,
-      date: new Date(date),
-      important,
-      done,
-      attendees,
-      creator,
+      creator: creator,
+      type: type,
+      location: location,
+      date: date,
     });
 
     if (existingEvent) throw new Error("found duplicate");
@@ -116,23 +113,24 @@ const EventMutaion = {
   updateEvent: async (
     root,
     { _id, type, location, date, important, done, attendees },
-    { Event, req },
+    { Event, req, User },
     info
   ) => {
     if (!req.isAuth) {
       throw new Error("unAuthorised");
     }
 
-    let existingEvent = await Event.findOne({
-      type,
-      location,
-      date: new Date(date),
-      important,
-      done,
-      attendees,
-    });
+    let user = await User.findOne({ email: req.userEmail });
 
-    // if (existingEvent._id !== _id) throw new Error("found duplicate");
+    if (user) {
+      let existingEvent = await Event.findOne({
+        creator: user._id,
+        type: type,
+        location: location,
+        date: date,
+      });
+      if (existingEvent) throw new Error("found duplicate");
+    }
 
     return await Event.findByIdAndUpdate(
       { _id },

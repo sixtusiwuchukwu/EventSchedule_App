@@ -51,6 +51,7 @@ will return values below which you choose any value you need
     username: String!
     email: String!
     password: String!
+
   }
 
 

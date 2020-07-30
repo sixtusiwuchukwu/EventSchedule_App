@@ -32,7 +32,7 @@ const EventSchema = new mongoose.Schema(
       default: false,
     },
     attendees: {
-      type: [String],
+      type: Number,
     },
     creator: {
       type: mongoose.Schema.Types.ObjectId,

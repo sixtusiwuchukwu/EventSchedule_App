@@ -16,7 +16,7 @@ const eventTypes = gql`
       date: String
       important: Boolean
       done: Boolean
-      attendees: [String]
+      attendees: Int
       creator: ID!
     ): Event
 
@@ -27,7 +27,7 @@ const eventTypes = gql`
       date: String
       important: Boolean
       done: Boolean
-      attendees: [String]
+      attendees: Int
     ): Event
 
     deleteEvent(_id: ID): Event
@@ -46,7 +46,7 @@ const eventTypes = gql`
     date: String
     important: Boolean
     done: Boolean
-    attendees: [String]
+    attendees: Int
     creator: ID
   }
   type important {
@@ -56,7 +56,6 @@ const eventTypes = gql`
     _id: ID
   }
 
- 
   extend type Query {
     getEvents(_id: ID!): [Event]
     getDone(_id: ID!): [Event]
