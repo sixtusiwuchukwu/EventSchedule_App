@@ -6,7 +6,7 @@ const userTypes = gql`
     # user section mutation type
     signupUser(username: String!, email: String!, password: String!): User
 
-    signinUser(email: String!, password: String!): User
+    signinUser(email: String!, password: String!): String!
 
     updateUser(
       id: ID!
@@ -17,15 +17,13 @@ const userTypes = gql`
   }
 
   extend type Query {
-    getUser(userId: ID!): User
-    getUsers: [User]
+    getUser: User
   }
   type User {
     _id: ID
     username: String!
     email: String!
     password: String!
-    token: String
   }
 `;
 module.exports = userTypes;

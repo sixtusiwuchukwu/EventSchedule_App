@@ -36,7 +36,7 @@ The different endpoints includes:
 # signinUser
 
 ```
-signinUser(email: String!, password: String!): User
+signinUser(email: String!, password: String!):String!
 
 ```
 
@@ -51,7 +51,6 @@ will return values below which you choose any value you need
     username: String!
     email: String!
     password: String!
-    token: String
   }
 
 
@@ -66,6 +65,15 @@ will return values below which you choose any value you need
 ```
 
    getEvents(_id: ID!): [Event]
+
+```
+
+# get user `to get the loggedin user a token is required to authentica the user and return the user details`
+
+```
+type Query {
+    getUser: User
+  }
 
 ```
 
@@ -139,7 +147,6 @@ getSchedule(_id: ID): [Event]
 ```
 
 addEvent(
-      _id: ID
       type: String
       location: String
       date: String
@@ -176,5 +183,16 @@ deleteEvents: Event
 
 ```
  done(_id: ID!): Event
+
+```
+
+if you are runing this app locally you have to create a .env file `config.env`
+
+`copy and paste this in the config.env file`
+
+```
+DB_URI="mongodb://localhost:27017/Events"
+PORT=2000
+SECRET="oliuydtsgfujil;kl"
 
 ```

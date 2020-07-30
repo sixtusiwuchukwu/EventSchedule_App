@@ -1,4 +1,4 @@
-const { UserMutation } = require("./services/usersection/resolver");
+const { UserMutation, UserQuery } = require("./services/usersection/resolver");
 
 const { EventMutaion, EventQuery } = require("./services/eventHandle/resolver");
 
@@ -8,6 +8,7 @@ const Mutation = {
 };
 const Query = {
   ...EventQuery,
+  ...UserQuery,
 };
 
 module.exports = {

@@ -11,7 +11,6 @@ const { gql } = require("apollo-server-express");
 const eventTypes = gql`
   extend type Mutation {
     addEvent(
-      _id: ID
       type: String
       location: String
       date: String
@@ -57,15 +56,7 @@ const eventTypes = gql`
     _id: ID
   }
 
-  input eventInput {
-    title: String
-    description: String
-    location: String
-    startDate: String
-    startTime: String
-    endDate: String
-    endTime: String
-  }
+ 
   extend type Query {
     getEvents(_id: ID!): [Event]
     getDone(_id: ID!): [Event]

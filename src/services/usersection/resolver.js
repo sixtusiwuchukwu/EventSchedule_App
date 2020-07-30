@@ -9,10 +9,18 @@ const bcrypt = require("bcrypt");
 
 const Hash = require("../../helpers/passwordHash/index");
 
-console.log(Hash);
+const UserQuery = {
+  getUser: async (root, arg, { User, req }) => {
+    if (!req.isAuth) {
+      throw new Error("UNATHOURIZED");
+    }
+    return await User.findOne({ email: req.userEmail });
+  },
+};
+
 const UserMutation = {
   signupUser: async (root, { email, username, password }, { User }, info) => {
-    const exitinguser = User.findOne({ email });
+    const exitinguser = await User.findOne({ email });
 
     if (exitinguser) {
       throw new Error(`user with ${email} already exist`);
@@ -24,11 +32,11 @@ const UserMutation = {
   },
 
   signinUser: async (root, { email, password }, { User }) => {
-    const founduser = await User.findOne({ email: email });
+    const founduser = await User.findOne({ email });
+    console.log(founduser);
     if (!founduser) {
-      return "user not found";
+      throw new Error("user not found");
     }
-    // #registered: database stored value
 
     // checking if creator inputed password is equal to the reqistered password using bcrypt as a dependency
 
@@ -37,15 +45,17 @@ const UserMutation = {
     // // if author password is not equal to registered password throw an error to the author
 
     if (!isvalidpassword) {
-      return "invalid password";
+      throw new Error("invalid password");
     }
 
     // after a sucessful checks return the user which is the author == currentAuthor that inputed values
 
     let Token = GenerateToken(founduser, process.env.SECRET, "1d");
-    founduser.token = Token;
-    return ({ token, ...rest } = founduser);
+
+    console.log(Token);
+    return Token;
   },
+
   updateUser: async (
     root,
     { id, email, username, password },
@@ -78,6 +88,7 @@ const UserMutation = {
 
 module.exports = {
   UserMutation,
+  UserQuery,
 };
 
 // <...........Query and mutation Resolver code Ends.......>

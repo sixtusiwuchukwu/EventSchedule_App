@@ -7,7 +7,7 @@
     "start": "nodemon index.js"
   },
   "engines": {
-    "node": "v10.19.0"
+    "node": "^v10.19.0"
   },
   "keywords": [],
   "author": "",
