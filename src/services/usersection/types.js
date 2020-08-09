@@ -25,5 +25,9 @@ const userTypes = gql`
     email: String!
     password: String!
   }
+
+  extend type Subscription {
+    newUser: User
+  }
 `;
 module.exports = userTypes;

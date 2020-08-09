@@ -4,6 +4,8 @@
 // Logining user
 // updating User
 
+const NEW_USER = "NEW_USER";
+
 const GenerateToken = require("../../helpers/generateToken/index");
 const bcrypt = require("bcrypt");
 
@@ -19,7 +21,12 @@ const UserQuery = {
 };
 
 const UserMutation = {
-  signupUser: async (root, { email, username, password }, { User }, info) => {
+  signupUser: async (
+    root,
+    { email, username, password },
+    { User, Pubsub },
+    info
+  ) => {
     const exitinguser = await User.findOne({ email });
 
     if (exitinguser) {
@@ -27,7 +34,7 @@ const UserMutation = {
     }
 
     const newuser = await User.create({ email, username, password });
-    console.log(newuser);
+    await Pubsub.publish(NEW_USER, { newUser: newuser });
     return newuser;
   },
 
@@ -86,7 +93,16 @@ const UserMutation = {
   },
 };
 
+const UserSubscription = {
+  newUser: {
+    subscribe: async (root, args, { Pubsub }) => {
+      return await Pubsub.asyncIterator(NEW_USER);
+    },
+  },
+};
+
 module.exports = {
+  UserSubscription,
   UserMutation,
   UserQuery,
 };

@@ -11,6 +11,9 @@ const linkSchemas = gql`
   type Query {
     _: Boolean
   }
+  type Subscription {
+    _: Boolean
+  }
 `;
 
 module.exports = [linkSchemas, UserSchema, EventSchema];
