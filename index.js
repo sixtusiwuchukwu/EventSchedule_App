@@ -70,6 +70,7 @@ const server = new ApolloServer({
   }),
   introspection: true,
   tracing: true,
+  playground: true,
 });
 // setting middleware
 
@@ -92,7 +93,7 @@ const BASE_URL = mode
 
 console.log("production:", mode);
 
-httpServer.listen({ port: PORT}, () =>
+httpServer.listen({ port: PORT }, () =>
   console.log(`🚀 Server ready at ${BASE_URL}`)
 );
 console.log(
