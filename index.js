@@ -35,7 +35,7 @@ app.use((req, res, next) => {
   next();
 });
 
-/* 
+/*
 conecting to database
 */
 
@@ -92,7 +92,7 @@ const BASE_URL = mode
 
 console.log("production:", mode);
 
-httpServer.listen({ port: PORT || 2000 }, () =>
+httpServer.listen({ port: PORT}, () =>
   console.log(`🚀 Server ready at ${BASE_URL}`)
 );
 console.log(
