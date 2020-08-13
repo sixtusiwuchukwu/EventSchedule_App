@@ -85,7 +85,7 @@ initializing server port
 
 */
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 2080;
 const mode = process.env.NODE_ENV === "production";
 const BASE_URL = mode
   ? `https://eventschedule.herokuapp.com${server.graphqlPath}`
